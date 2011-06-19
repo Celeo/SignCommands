@@ -1,0 +1,5 @@
+name: SignCommands
+main: com.celeo.signcommands.SignCommands
+author: Celeo
+version: 0.1
+description: Plugin that allows commands to be run off of signs
