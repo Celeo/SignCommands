@@ -1,11 +1,15 @@
 package com.celeo.signcommands;
 
 import org.bukkit.Material;
+import org.bukkit.Server;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerListener;
+
+import com.iConomy.iConomy;
+import com.iConomy.system.Holdings;
 
 public class SignPlayerListener extends PlayerListener {
 	
@@ -17,21 +21,48 @@ public class SignPlayerListener extends PlayerListener {
 	
 	 public void onPlayerInteract(PlayerInteractEvent event) {
 		 Player player = event.getPlayer();
-		 plugin.log.info(Util.pre + player.getDisplayName() + " is interacting with a sign");
 		 if(event.getClickedBlock() == null || event.isCancelled())
 		 {
 			 return;
 		 }
 		 Block b = event.getClickedBlock();
-		 Material t = b.getType();
-		 if(t == Material.SIGN_POST || t == Material.WALL_SIGN)
+		 if(b.getType() == Material.SIGN_POST || b.getType() == Material.WALL_SIGN)
 		 {
-			 String[] lines = ((Sign) b.getState()).getLines();
-			 if(lines[0].equalsIgnoreCase("[signcommands]"))
+			 Util.log.info(Util.pre + player.getDisplayName() + " is interacting with a sign");
+			 Sign s = (Sign)b.getState();
+			 String[] lines = s.getLines();
+			 if(lines[0].equalsIgnoreCase("<Buy Region>"))
 			 {
-				 if(lines[2].equalsIgnoreCase(""))
+				 Integer x = s.getX();
+				 Integer y = s.getY();
+				 Integer z = s.getZ();
+				 String msg = 
+					 Util.pre + player.getDisplayName() + " paid for a region at " +
+					 x.toString() + " " + y.toString() + " " + z.toString();
+				 plugin.debug(msg);
+				 if(Util.admins != null)
 				 {
-					 
+					 msg = Util.cgreen + msg;
+					 Server server = event.getPlayer().getServer();
+					 for(String p : Util.admins)
+					 {
+						 Player admin = server.getPlayer(p);
+						 if(admin.isOnline())
+							 admin.sendMessage(msg);
+					 }
+				 }
+				 double cost = Double.parseDouble(lines[1]);
+				 if(iConomy.hasAccount(player.getDisplayName()))
+				 {
+					 Holdings balance = iConomy.getAccount(player.getDisplayName()).getHoldings();
+					 balance.subtract(cost);
+					 Util.numPurchases ++;
+					 Util.purchases.add(player.getDisplayName() + " : " + x.toString() +
+							 " " + y.toString() + " " + z.toString());
+				 }
+				 else
+				 {
+					 player.sendMessage(Util.cred + "You do not have an iConomy account");
 				 }
 			 }
 		 }
