@@ -40,6 +40,7 @@ public class Util {
 	public static ChatColor cwhite = ChatColor.WHITE;
 	public static ChatColor cred = ChatColor.RED;
 	public static ChatColor cgray = ChatColor.GRAY;
+	public static ChatColor cblue = ChatColor.BLUE;
 	
 	public final static Logger log = Logger.getLogger("Minecraft");	
 	public static boolean isDebugging = true;

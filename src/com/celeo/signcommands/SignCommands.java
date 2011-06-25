@@ -16,7 +16,8 @@ import com.iConomy.*;
 public class SignCommands extends JavaPlugin {
 	public static PermissionHandler Permissions;
 	public iConomy iConomy = null;
-	public SignPlayerListener playerListener = new SignPlayerListener(this);
+	public SignInteractListener interactListener = new SignInteractListener(this);
+	public SignPlaceListener placeListener = new SignPlaceListener(this);
 	
 	@Override
 	public void onDisable() {
@@ -28,7 +29,8 @@ public class SignCommands extends JavaPlugin {
 	public void onEnable() {
 		Util.load(this);
 		PluginManager mngr = getServer().getPluginManager();
-		mngr.registerEvent(Event.Type.PLAYER_INTERACT, this.playerListener, Event.Priority.Normal, this);
+		mngr.registerEvent(Event.Type.PLAYER_INTERACT, this.interactListener, Event.Priority.Normal, this);
+		mngr.registerEvent(Event.Type.BLOCK_PLACE, this.placeListener, Event.Priority.Normal, this);
 		setupPermissions();
 		if (iConomy == null)
 		{
@@ -70,6 +72,19 @@ public class SignCommands extends JavaPlugin {
 			String cmd = args[0];
 			if(Permissions.has(player, "sc.admin"))
 			{
+				if(cmd.equalsIgnoreCase("-a"))
+				{
+					if(args.length >= 1)
+					{
+						Util.admins.add(args[1]);
+						player.sendMessage(Util.cgreen + args[1] + " added to the admin list");
+						Util.saveAll();
+					}
+					else
+					{
+						player.sendMessage(Util.cred + "Specify a player to add");
+					}
+				}
 				if(cmd.equalsIgnoreCase("-r") || cmd.equalsIgnoreCase("-d"))
 				{
 					if(args.length >= 2)

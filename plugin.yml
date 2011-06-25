@@ -1,7 +1,7 @@
 name: SignCommands
 main: com.celeo.signcommands.SignCommands
 author: Celeo
-version: 1.0
+version: 1.3
 description: Plugin that players to buy land
 commands:
   sc:
