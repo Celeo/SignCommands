@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
+import org.bukkit.entity.Player;
 import org.bukkit.ChatColor;
 import org.bukkit.util.config.Configuration;
 
@@ -50,6 +51,7 @@ public class Util {
 	
 	public static ArrayList<String> admins = new ArrayList<String>();
 	public static HashMap<String, String> purchases = new HashMap<String, String>();
+	public static ArrayList<Player> makingMail = new ArrayList<Player>();
 	
 	public static int numPurchases = 0;
 	

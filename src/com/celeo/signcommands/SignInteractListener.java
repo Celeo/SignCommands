@@ -150,6 +150,22 @@ public class SignInteractListener extends PlayerListener {
 					}
 				}
 			}
+			//Mail sending
+			if(lines[0].equalsIgnoreCase("<Mail>"))
+			{
+				if(Util.makingMail.contains(player))
+				{
+					//Send the mail
+					
+					Util.makingMail.remove(player);
+					player.sendMessage(Util.cgreen + "Message delivered to " + lines[2]);
+				}
+				else
+				{
+					player.sendMessage(Util.cred + "You have not created a message yet. /mail [your message],");
+					player.sendMessage(Util.cred + "then hit a Mail Sign");
+				}
+			}
 		}
 	}
 	

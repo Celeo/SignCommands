@@ -22,23 +22,10 @@ public class SignPlaceListener extends BlockListener {
 		{
 			Sign s = (Sign)b.getState();
 			String[] lines = s.getLines();
-			if(lines[0].equalsIgnoreCase("<Buy Region>"))
+			if(lines[0].equalsIgnoreCase("<Buy Region>") || lines[0].equalsIgnoreCase("<Weather>") || lines[0].equalsIgnoreCase("<Mail>"))
 			{
 				if(SignCommands.Permissions.has(player, "sc.admin"))
 				{
-					//Allow event
-				}
-				else
-				{
-					player.sendMessage(Util.cred + "You cannot place a sign with that command");
-					event.setCancelled(true);
-				}
-			}
-			if(lines[0].equalsIgnoreCase("<Weather>"))
-			{
-				if(SignCommands.Permissions.has(player, "sc.admin"))
-				{
-					//Allow event
 				}
 				else
 				{

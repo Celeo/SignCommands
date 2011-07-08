@@ -55,11 +55,14 @@ public class SignCommands extends JavaPlugin {
 	public void setupPermissions() {
 	    Plugin test = getServer().getPluginManager().getPlugin("Permissions");
 	    if (Permissions == null)
-	      if (test != null) {
+	      if (test != null)
+		  {
 	        getServer().getPluginManager().enablePlugin(test);
 	        Permissions = ((Permissions)test).getHandler();
-	      } else {
-	    	  Util.log.info(Util.cpre + "requires Permissions, disabling...");
+	      }
+		  else
+			{
+			Util.log.info(Util.cpre + "requires Permissions, disabling...");
 	        getServer().getPluginManager().disablePlugin(this);
 	      }
 	  }
@@ -113,6 +116,27 @@ public class SignCommands extends JavaPlugin {
 					}
 					player.sendMessage(Util.cgray + Util.pre + "The following players have purchased land: ");
 					player.sendMessage(Util.cgreen + list);
+				}
+			}
+			else
+			{
+				if(cmd.equalsIgnoreCase("mail"))
+				{
+					if(args.length >= 2)
+					{
+						String msg = "";
+						for(int i = 1; i < args.length; i++)
+						{
+							msg += args[i];
+						}
+						Util.makingMail.add(player);
+						player.sendMessage(Util.cgreen + "Message created");
+						player.sendMessage(Util.cgreen + "Hit the mail box for the player you wish to send mail to");
+					}
+					else
+					{
+						player.sendMessage(Util.cred + "Command is /mail [your message]");
+					}
 				}
 			}
 		}

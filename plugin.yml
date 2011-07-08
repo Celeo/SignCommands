@@ -7,3 +7,6 @@ commands:
   sc:
     description: Plugin-specific commands for server admins
     usage: /<command> [parameters]
+  mail:
+    description: Command for making mail letters
+    usage: /<command> [message]
