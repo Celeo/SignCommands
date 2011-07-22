@@ -24,10 +24,7 @@ public class SignPlaceListener extends BlockListener {
 			String[] lines = s.getLines();
 			if(lines[0].equalsIgnoreCase("<Buy Region>") || lines[0].equalsIgnoreCase("<Weather>") || lines[0].equalsIgnoreCase("<Mail>"))
 			{
-				if(SignCommands.Permissions.has(player, "sc.admin"))
-				{
-				}
-				else
+				if(!SignCommands.Permissions.has(player, "sc.admin"))
 				{
 					player.sendMessage(Util.cred + "You cannot place a sign with that command");
 					event.setCancelled(true);

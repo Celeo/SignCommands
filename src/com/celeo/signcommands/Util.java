@@ -51,7 +51,7 @@ public class Util {
 	
 	public static ArrayList<String> admins = new ArrayList<String>();
 	public static HashMap<String, String> purchases = new HashMap<String, String>();
-	public static ArrayList<Player> makingMail = new ArrayList<Player>();
+	public static HashMap<Player, String> makingMail = new HashMap<Player, String>();
 	
 	public static int numPurchases = 0;
 	

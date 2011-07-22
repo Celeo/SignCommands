@@ -137,7 +137,7 @@ public class SignInteractListener extends PlayerListener {
 							balance.subtract(cost);
 							player.getWorld().setStorm(false);
 							player.getWorld().setThundering(false);
-							player.sendMessage(Util.cblue + "Weaher set to clear");
+							player.sendMessage(Util.cblue + "Weather set to clear");
 						}
 						else
 						{
@@ -153,17 +153,36 @@ public class SignInteractListener extends PlayerListener {
 			//Mail sending
 			if(lines[0].equalsIgnoreCase("<Mail>"))
 			{
-				if(Util.makingMail.contains(player))
+				if(lines[1].equalsIgnoreCase(player.getDisplayName()))
 				{
-					//Send the mail
 					
-					Util.makingMail.remove(player);
-					player.sendMessage(Util.cgreen + "Message delivered to " + lines[2]);
+					//Player's sign. They need to check their mail.
+					
 				}
 				else
 				{
-					player.sendMessage(Util.cred + "You have not created a message yet. /mail [your message],");
-					player.sendMessage(Util.cred + "then hit a Mail Sign");
+					if(Util.makingMail.containsKey(player))
+					{
+						try
+						{
+							Integer num = Integer.parseInt(lines[2]);
+							num ++;
+							s.setLine(2, num.toString());
+							s.update();
+							player.sendMessage(Util.cgreen + "Mail sent");
+							Util.makingMail.remove(player);
+						}
+						catch(Exception ex)
+						{
+							player.sendMessage(Util.cred + "Error with the sending of your mail.");
+							player.sendMessage(Util.cred + "Are you hitting a mailbox sign?");
+						}
+					}
+					else
+					{
+						player.sendMessage(Util.cred + "You have not created a message yet. Enter /mail [your message],");
+						player.sendMessage(Util.cred + "then hit a Mail Sign");
+					}
 				}
 			}
 		}

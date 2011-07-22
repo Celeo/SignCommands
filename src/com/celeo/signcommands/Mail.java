@@ -12,4 +12,16 @@ public class Mail {
 		this.message = m;
 	}
 	
+	public String getFrom() {
+		return this.from;
+	}
+	
+	public String getTo() {
+		return this.to;
+	}
+	
+	public String getMessage() {
+		return this.message;
+	}
+	
 }

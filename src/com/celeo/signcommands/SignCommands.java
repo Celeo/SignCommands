@@ -129,7 +129,7 @@ public class SignCommands extends JavaPlugin {
 						{
 							msg += args[i];
 						}
-						Util.makingMail.add(player);
+						Util.makingMail.put(player, msg);
 						player.sendMessage(Util.cgreen + "Message created");
 						player.sendMessage(Util.cgreen + "Hit the mail box for the player you wish to send mail to");
 					}
